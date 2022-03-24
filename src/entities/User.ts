@@ -27,6 +27,9 @@ export class User {
   })
   email: string | null;
 
+  @Column('character varying', { name: 'discord_id', length: 30 })
+  discordId: string;
+
   @ManyToMany(() => Event, (event) => event.users)
   events: Event[];
 
