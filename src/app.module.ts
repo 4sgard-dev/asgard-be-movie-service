@@ -9,6 +9,8 @@ import { RatingController } from './controller/rating/rating.controller';
 import { Rating } from './entities/Rating';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserController } from './controller/user/user.controller';
+import { Event } from './entities/Event';
+import { EventController } from './controller/event/event.controller';
 
 @Module({
   imports: [
@@ -27,13 +29,14 @@ import { UserController } from './controller/user/user.controller';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Movie, User, Rating]),
+    TypeOrmModule.forFeature([Movie, User, Rating, Event]),
   ],
   controllers: [
     AppController,
     MovieController,
     RatingController,
     UserController,
+    EventController,
   ],
   providers: [AppService],
 })

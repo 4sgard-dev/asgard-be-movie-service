@@ -32,4 +32,7 @@ export class Event {
   @ManyToOne(() => Movie, (movie) => movie.events, { onDelete: 'SET NULL' })
   @JoinColumn([{ name: 'movie_id', referencedColumnName: 'movieId' }])
   movie: Movie;
+
+  @Column('integer', { name: 'movie_id' })
+  movieId: number;
 }
