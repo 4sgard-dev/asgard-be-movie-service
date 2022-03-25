@@ -8,6 +8,7 @@ import { Movie } from './entities/Movie';
 import { RatingController } from './controller/rating/rating.controller';
 import { Rating } from './entities/Rating';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserController } from './controller/user/user.controller';
 
 @Module({
   imports: [
@@ -28,7 +29,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     TypeOrmModule.forFeature([Movie, User, Rating]),
   ],
-  controllers: [AppController, MovieController, RatingController],
+  controllers: [
+    AppController,
+    MovieController,
+    RatingController,
+    UserController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}
