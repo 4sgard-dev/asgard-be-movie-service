@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { Rating } from '../../entities/Rating';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Equal, Repository } from 'typeorm';
 import { UpdateRating } from '../dto/UpdateRating';
 import { CreateRating } from '../dto/CreateRating';
 import { User } from '../../entities/User';
@@ -99,13 +99,10 @@ export class RatingController {
     @Headers('discord-id') discordId: string,
   ) {
     const ratingEntity: Rating = await this.ratingRepository.findOne({
-      relations: {
-        user: true,
-      },
       where: {
         movieId: rating.movieId,
         user: {
-          discordId,
+          discordId: Equal(discordId),
         },
       },
     });
@@ -116,7 +113,7 @@ export class RatingController {
 
     const userEntity: User = await this.userRepostiory.findOne({
       where: {
-        discordId,
+        discordId: Equal(discordId),
       },
     });
 
