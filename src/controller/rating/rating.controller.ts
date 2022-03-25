@@ -110,7 +110,7 @@ export class RatingController {
       },
     });
 
-    if (!ratingEntity) {
+    if (ratingEntity) {
       throw new HttpException('Conflict', HttpStatus.CONFLICT);
     }
 
