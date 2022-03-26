@@ -12,6 +12,8 @@ import { UserController } from './controller/user/user.controller';
 import { Event } from './entities/Event';
 import { EventController } from './controller/event/event.controller';
 import { MovieService } from './service/movie/movie.service';
+import { TmdbService } from './service/tmdb/tmdb.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { MovieService } from './service/movie/movie.service';
       inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([Movie, User, Rating, Event]),
+    HttpModule,
   ],
   controllers: [
     AppController,
@@ -42,6 +45,6 @@ import { MovieService } from './service/movie/movie.service';
     UserController,
     EventController,
   ],
-  providers: [AppService, MovieService],
+  providers: [AppService, MovieService, TmdbService],
 })
 export class AppModule {}

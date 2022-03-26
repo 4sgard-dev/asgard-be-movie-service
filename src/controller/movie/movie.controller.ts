@@ -1,16 +1,21 @@
 import {
+  Body,
   Controller,
   Get,
   HttpException,
   HttpStatus,
   Param,
   ParseIntPipe,
+  Post,
   Query,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from '../../entities/Movie';
 import { MovieService } from '../../service/movie/movie.service';
+import { UpdateRating } from '../dto/UpdateRating';
+import { CreateMovie } from '../dto/CreateMovie';
+import { TmdbService } from '../../service/tmdb/tmdb.service';
 
 @Controller('movies')
 export class MovieController {
@@ -18,6 +23,7 @@ export class MovieController {
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
     private movieService: MovieService,
+    private tmdbService: TmdbService,
   ) {}
 
   @Get()
@@ -69,5 +75,27 @@ export class MovieController {
     }
 
     return movie;
+  }
+
+  @Post()
+  async createMovie(@Body() movie: CreateMovie) {
+    const imdbMovie = await this.tmdbService
+      .getMovieByImdbId(movie.imdbId)
+      .toPromise();
+
+    if (!imdbMovie) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    console.log(imdbMovie);
+
+    const movieEntityPersist = {
+      imdbId: movie.imdbId,
+      name: imdbMovie.title,
+    } as Movie;
+
+    await this.movieRepository.save(movieEntityPersist);
+
+    return;
   }
 }
