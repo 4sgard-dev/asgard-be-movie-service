@@ -36,7 +36,7 @@ export class MovieService {
       .where(
         'LOWER(m.name) like LOWER(:name) OR m.movie_id = :id OR LOWER(m.imdb_id) like LOWER(:name)',
       )
-      .innerJoin('m.ratings', 'r')
+      .leftJoin('m.ratings', 'r')
       .groupBy('m.movie_id')
       .setParameter('name', '%' + name + '%')
       .setParameter('id', Number(name) || 0)

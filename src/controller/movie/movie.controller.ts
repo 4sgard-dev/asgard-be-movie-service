@@ -45,7 +45,7 @@ export class MovieController {
       .addSelect('m.name', 'name')
       .addSelect('m.imdb_id', 'imdbId')
       .addSelect('ROUND(avg(r.rating), 2)', 'rating')
-      .innerJoin('m.ratings', 'r')
+      .leftJoin('m.ratings', 'r')
       .groupBy('m.movie_id')
       .getRawMany();
   }
@@ -59,7 +59,7 @@ export class MovieController {
       .addSelect('m.imdb_id', 'imdbId')
       .addSelect('ROUND(avg(r.rating), 2)', 'rating')
       .where('m.movie_id = :id')
-      .innerJoin('m.ratings', 'r')
+      .leftJoin('m.ratings', 'r')
       .groupBy('m.movie_id')
       .setParameter('id', id)
       .getRawOne();
