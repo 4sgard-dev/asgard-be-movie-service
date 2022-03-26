@@ -5,20 +5,33 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from '../../entities/Movie';
+import { MovieService } from '../../service/movie/movie.service';
 
 @Controller('movies')
 export class MovieController {
   constructor(
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
+    private movieService: MovieService,
   ) {}
 
   @Get()
-  async getMovies(): Promise<Movie[]> {
+  async getMovies(@Query('imdbId') imdbId: string): Promise<Movie[]> {
+    if (imdbId) {
+      const movie = await this.movieService.getMovieByImdbId(imdbId);
+
+      if (!movie) {
+        throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+      }
+
+      return movie;
+    }
+
     return this.movieRepository
       .createQueryBuilder('m')
       .select('m.movie_id', 'id')

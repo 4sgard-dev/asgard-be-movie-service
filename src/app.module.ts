@@ -11,6 +11,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserController } from './controller/user/user.controller';
 import { Event } from './entities/Event';
 import { EventController } from './controller/event/event.controller';
+import { MovieService } from './service/movie/movie.service';
 
 @Module({
   imports: [
@@ -38,6 +39,6 @@ import { EventController } from './controller/event/event.controller';
     UserController,
     EventController,
   ],
-  providers: [AppService],
+  providers: [AppService, MovieService],
 })
 export class AppModule {}
