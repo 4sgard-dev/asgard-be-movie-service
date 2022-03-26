@@ -21,7 +21,10 @@ export class MovieController {
   ) {}
 
   @Get()
-  async getMovies(@Query('imdbId') imdbId: string): Promise<Movie[]> {
+  async getMovies(
+    @Query('imdbId') imdbId: string,
+    @Query('search') search: string,
+  ): Promise<Movie[]> {
     if (imdbId) {
       const movie = await this.movieService.getMovieByImdbId(imdbId);
 
@@ -30,6 +33,10 @@ export class MovieController {
       }
 
       return movie;
+    }
+
+    if (search) {
+      return this.movieService.searchMovieByName(search);
     }
 
     return this.movieRepository

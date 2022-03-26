@@ -25,4 +25,20 @@ export class MovieService {
 
     return movie;
   }
+
+  async searchMovieByName(name: string) {
+    const movie = await this.movieRepository
+      .createQueryBuilder('m')
+      .select('m.movie_id', 'id')
+      .addSelect('m.name', 'name')
+      .addSelect('m.imdb_id', 'imdbId')
+      .addSelect('ROUND(avg(r.rating), 2)', 'rating')
+      .where('LOWER(m.name) like LOWER(:name)')
+      .innerJoin('m.ratings', 'r')
+      .groupBy('m.movie_id')
+      .setParameter('name', '%' + name + '%')
+      .getRawMany<Movie>();
+
+    return movie;
+  }
 }
