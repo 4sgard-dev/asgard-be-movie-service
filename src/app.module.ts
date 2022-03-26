@@ -27,6 +27,9 @@ import { MovieService } from './service/movie/movie.service';
         database: configService.get<string>('DB_DATABASE'),
         synchronize: false,
         entities: ['dist/**/entities/*.js'],
+        extra: {
+          connectionLimit: 5,
+        },
       }),
       inject: [ConfigService],
     }),
