@@ -79,6 +79,14 @@ export class MovieController {
 
   @Post()
   async createMovie(@Body() movie: CreateMovie) {
+    const movieEntity = await this.movieRepository.findOneBy({
+      imdbId: movie.imdbId,
+    });
+
+    if (movieEntity) {
+      throw new HttpException('Conflict', HttpStatus.CONFLICT);
+    }
+
     const imdbMovie = await this.tmdbService
       .getMovieByImdbId(movie.imdbId)
       .toPromise();
