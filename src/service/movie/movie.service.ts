@@ -33,10 +33,13 @@ export class MovieService {
       .addSelect('m.name', 'name')
       .addSelect('m.imdb_id', 'imdbId')
       .addSelect('ROUND(avg(r.rating), 2)', 'rating')
-      .where('LOWER(m.name) like LOWER(:name)')
+      .where(
+        'LOWER(m.name) like LOWER(:name) OR m.movie_id = :id OR LOWER(m.imdb_id) like LOWER(:name)',
+      )
       .innerJoin('m.ratings', 'r')
       .groupBy('m.movie_id')
       .setParameter('name', '%' + name + '%')
+      .setParameter('id', Number(name) || 0)
       .getRawMany<Movie>();
 
     return movie;
