@@ -26,6 +26,36 @@ export class MovieService {
     return movie;
   }
 
+  async getLatestMovies() {
+    const movie = await this.movieRepository.manager
+      .createQueryBuilder()
+      .select('subquery.id', 'id')
+      .addSelect('subquery.name', 'name')
+      .addSelect('subquery.imdbid', 'imdbId')
+      .addSelect('subquery.rating', 'rating')
+      .addSelect('subquery.poster_path', 'posterPath')
+      .addSelect('e.time', 'date')
+      .from(
+        (qb) =>
+          qb
+            .select('m.movie_id', 'id')
+            .addSelect('m.name', 'name')
+            .addSelect('m.imdb_id', 'imdbid')
+            .addSelect('m.poster_path', 'poster_path')
+            .addSelect('ROUND(avg(r.rating), 2)', 'rating')
+            .from(Movie, 'm')
+            .leftJoin('m.ratings', 'r')
+            .groupBy('m.movie_id'),
+        'subquery',
+      )
+      .innerJoin('event', 'e', 'subquery.id = e.movie_id')
+      .orderBy('e.time', 'DESC')
+      .limit(5)
+      .getRawMany();
+
+    return movie;
+  }
+
   async searchMovieByName(name: string) {
     const movie = await this.movieRepository
       .createQueryBuilder('m')

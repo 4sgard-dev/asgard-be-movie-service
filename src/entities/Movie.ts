@@ -24,6 +24,9 @@ export class Movie {
   })
   imdbId: string;
 
+  @Column('character varying', { name: 'poster_path', length: 255 })
+  posterPath: string;
+
   @OneToMany(() => Event, (event) => event.movie)
   events: Event[];
 

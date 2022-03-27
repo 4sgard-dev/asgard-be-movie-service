@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
@@ -16,6 +17,7 @@ import { MovieService } from '../../service/movie/movie.service';
 import { UpdateRating } from '../dto/UpdateRating';
 import { CreateMovie } from '../dto/CreateMovie';
 import { TmdbService } from '../../service/tmdb/tmdb.service';
+import { MovieQuery } from '../dto/MovieQuery';
 
 @Controller('movies')
 export class MovieController {
@@ -27,12 +29,9 @@ export class MovieController {
   ) {}
 
   @Get()
-  async getMovies(
-    @Query('imdbId') imdbId: string,
-    @Query('search') search: string,
-  ): Promise<Movie[]> {
-    if (imdbId) {
-      const movie = await this.movieService.getMovieByImdbId(imdbId);
+  async getMovies(@Query() query: MovieQuery): Promise<Movie[]> {
+    if (query.imdbId) {
+      const movie = await this.movieService.getMovieByImdbId(query.imdbId);
 
       if (!movie) {
         throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
@@ -41,8 +40,12 @@ export class MovieController {
       return movie;
     }
 
-    if (search) {
-      return this.movieService.searchMovieByName(search);
+    if (query.search) {
+      return this.movieService.searchMovieByName(query.search);
+    }
+
+    if (query.latest) {
+      return this.movieService.getLatestMovies();
     }
 
     return this.movieRepository
@@ -100,6 +103,7 @@ export class MovieController {
     const movieEntityPersist = {
       imdbId: movie.imdbId,
       name: imdbMovie.title,
+      posterPath: imdbMovie.poster_path,
     } as Movie;
 
     await this.movieRepository.save(movieEntityPersist);
