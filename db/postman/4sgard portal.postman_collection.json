@@ -33,12 +33,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}//users",
+					"raw": "{{BASE_URL}}/users",
 					"host": [
 						"{{BASE_URL}}"
 					],
 					"path": [
-						"",
 						"users"
 					]
 				}
