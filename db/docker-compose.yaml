@@ -34,6 +34,9 @@ services:
       - '5432:5432'
   mockoon:
     image: mockoon/cli:latest
+    depends_on:
+      asgard-be-movie-service:
+        condition: service_healthy
     volumes:
       - type: bind
         source: ./db/mockoon/mock.json
