@@ -18,6 +18,7 @@ import { Equal, Repository } from 'typeorm';
 import { UpdateRating } from '../dto/UpdateRating';
 import { CreateRating } from '../dto/CreateRating';
 import { User } from '../../entities/User';
+import { RatingQuery } from '../dto/RatingQuery';
 
 @Controller('ratings')
 export class RatingController {
@@ -29,15 +30,32 @@ export class RatingController {
   ) {}
 
   @Get()
-  async getRatingByMovieId(
-    @Query('movieId', ParseIntPipe) movieId: number,
-  ): Promise<Rating[]> {
-    return this.ratingRepository.find({
-      relations: {
-        user: true,
-      },
-      where: { movieId: movieId },
-    });
+  async getRatingByMovieId(@Query() query: RatingQuery): Promise<Rating[]> {
+    if (query.movieId) {
+      return this.ratingRepository.find({
+        relations: {
+          user: true,
+        },
+        where: { movieId: query.movieId },
+      });
+    }
+
+    if (query.userId) {
+      return this.ratingRepository.find({
+        relations: {
+          movie: true,
+        },
+        where: {
+          user: {
+            userId: query.userId,
+          },
+        },
+        order: {
+          rating: 'DESC',
+        },
+        take: 10,
+      });
+    }
   }
 
   @Delete(':id')
