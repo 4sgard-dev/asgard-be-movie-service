@@ -2,6 +2,9 @@ version: "3.9"
 services:
   asgard-be-movie-service:
     image: asgard-be-movie-service:main
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "3000:3000"
     environment:
@@ -16,5 +19,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - '5432:5432'
