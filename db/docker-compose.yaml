@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  asgard-be-movie-service:
+    image: asgard-be-movie-service:main
+    ports:
+      - "3000:3000"
+    environment:
+      DB_URL: db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      TMDB_API_TOKEN: a
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
