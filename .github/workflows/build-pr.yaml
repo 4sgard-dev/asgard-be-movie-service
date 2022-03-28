@@ -34,3 +34,7 @@ jobs:
         with:
           database_url: "postgres://postgres:postgres@localhost:5432/postgres"
           backup_file: "./db/asgard.dump"
+      - uses: matt-ball/newman-action@master
+        with:
+          collection: ./db/postman/4sgard portal.postman_collection.json
+          environment: ./db/postman/DEV.postman_environment.json
