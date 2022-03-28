@@ -13,15 +13,18 @@ export class TmdbService {
 
   getMovieByImdbId(imdbId: string): Observable<MovieResult> {
     return this.httpService
-      .get<TMDBResponse>(`https://api.themoviedb.org/3/find/${imdbId}`, {
-        params: {
-          external_source: 'imdb_id',
+      .get<TMDBResponse>(
+        `${this.configService.get<string>('TMDB_URL')}/3/find/${imdbId}`,
+        {
+          params: {
+            external_source: 'imdb_id',
+          },
+          headers: {
+            Authorization:
+              'Bearer ' + this.configService.get<string>('TMDB_API_TOKEN'),
+          },
         },
-        headers: {
-          Authorization:
-            'Bearer ' + this.configService.get<string>('TMDB_API_TOKEN'),
-        },
-      })
+      )
       .pipe(
         map((searchResult) => searchResult.data.movie_results),
         map((movieResult) =>

@@ -1,0 +1,67 @@
+{
+  "uuid": "611466af-087b-41dd-a0e1-92fc4dd336c7",
+  "lastMigration": 19,
+  "name": "Mock",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "ab1d314c-340f-472c-a11d-e27c69e3fdb8",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "3/find/test",
+      "responses": [
+        {
+          "uuid": "5e4e3bfe-a195-4961-ad02-268fb5183058",
+          "body": "{\r\n    \"movie_results\": [\r\n        {\r\n            \"poster_path\": \"/test-poster.jpg\",\r\n            \"video\": false,\r\n            \"vote_average\": 7.5,\r\n            \"overview\": \"test overview\",\r\n            \"release_date\": \"2010-08-12\",\r\n            \"vote_count\": 6251,\r\n            \"adult\": false,\r\n            \"backdrop_path\": \"/test-back.jpg\",\r\n            \"title\": \"Test the Test\",\r\n            \"genre_ids\": [\r\n                28,\r\n                35,\r\n                14,\r\n                10749\r\n            ],\r\n            \"id\": 22538,\r\n            \"original_language\": \"en\",\r\n            \"original_title\": \"Test the Test\",\r\n            \"popularity\": 60.083\r\n        }\r\n    ],\r\n    \"person_results\": [],\r\n    \"tv_results\": [],\r\n    \"tv_episode_results\": [],\r\n    \"tv_season_results\": []\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}

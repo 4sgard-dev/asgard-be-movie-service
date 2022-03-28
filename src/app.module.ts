@@ -14,6 +14,8 @@ import { EventController } from './controller/event/event.controller';
 import { MovieService } from './service/movie/movie.service';
 import { TmdbService } from './service/tmdb/tmdb.service';
 import { HttpModule } from '@nestjs/axios';
+import { TerminusModule } from '@nestjs/terminus';
+import { HealthController } from './controller/health/health.controller';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { HttpModule } from '@nestjs/axios';
     }),
     TypeOrmModule.forFeature([Movie, User, Rating, Event]),
     HttpModule,
+    TerminusModule,
   ],
   controllers: [
     AppController,
@@ -44,6 +47,7 @@ import { HttpModule } from '@nestjs/axios';
     RatingController,
     UserController,
     EventController,
+    HealthController,
   ],
   providers: [AppService, MovieService, TmdbService],
 })
