@@ -31,10 +31,10 @@ services:
     image: mockoon/cli:latest
     depends_on:
       asgard-be-movie-service:
-        condition: service_started
+        condition: service_healthy
     volumes:
       - type: bind
-        source: ./db/mockoon/mock.json
+        source: ./mockoon/mock.json
         target: /data
     command: -d data -p 4000
     ports:
