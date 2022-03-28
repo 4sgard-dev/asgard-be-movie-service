@@ -5,6 +5,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mockoon:
+        condition: service_started
     ports:
       - "3000:3000"
     environment:
@@ -29,9 +31,6 @@ services:
       - '5432:5432'
   mockoon:
     image: mockoon/cli:latest
-    depends_on:
-      asgard-be-movie-service:
-        condition: service_started
     volumes:
       - type: bind
         source: ./mockoon/mock.json
