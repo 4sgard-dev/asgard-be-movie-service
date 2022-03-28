@@ -15,7 +15,7 @@ services:
       TMDB_API_TOKEN: a
       TMDB_URL: http://mockoon:4000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD", "curl", "-f", "http://asgard-be-movie-service:3000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
