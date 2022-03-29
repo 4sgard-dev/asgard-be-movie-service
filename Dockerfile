@@ -26,6 +26,6 @@ COPY . .
 COPY --from=development /usr/src/app/dist ./dist
 
 HEALTHCHECK  --interval=5m --timeout=3s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
 
 CMD ["node", "dist/main"]
