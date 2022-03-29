@@ -39,4 +39,5 @@ jobs:
           collection: ./db/postman/4sgard portal.postman_collection.json
           environment: ./db/postman/DEV.postman_environment.json
       - name: Check Docker logs
+        if: always()
         run: docker-compose -f ./db/docker-compose.yaml logs
