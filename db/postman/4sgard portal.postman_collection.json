@@ -82,6 +82,135 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Create Rating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "discord-id",
+						"value": "123456789",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/ratings",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Rating Second Time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"movieId\": 1,\r\n    \"rating\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/ratings",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "discord-id",
+						"value": "123456789",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventDate\": \"2022-03-29\",\r\n    \"movieId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/events",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
