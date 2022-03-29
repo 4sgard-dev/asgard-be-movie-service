@@ -31,7 +31,7 @@ services:
     image: mockoon/cli:latest
     depends_on:
       asgard-be-movie-service:
-        condition: service_started
+        condition: service_healthy
     volumes:
       - type: bind
         source: ./mockoon/mock.json
