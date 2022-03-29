@@ -25,7 +25,7 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=30s \
-  CMD curl -f http://localhost:3000/health || exit 1
+HEALTHCHECK  --interval=5m --timeout=3s \
+  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
 
 CMD ["node", "dist/main"]
