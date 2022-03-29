@@ -25,7 +25,7 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
-HEALTHCHECK  --interval=5m --timeout=3s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+HEALTHCHECK --interval=6s --timeout=20s --start-period=4s \  
+    CMD node healthcheck.js
 
 CMD ["node", "dist/main"]
