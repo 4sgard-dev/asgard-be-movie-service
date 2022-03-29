@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build Docker image on PR
+name: Build and Test application on PR
 
 on:
   pull_request:
@@ -14,7 +14,8 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-image:
+  build-and-test-application:
+    name: Build and Test application
     runs-on: ubuntu-latest
 
     steps:
