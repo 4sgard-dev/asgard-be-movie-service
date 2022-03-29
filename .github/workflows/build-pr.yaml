@@ -35,7 +35,7 @@ jobs:
         with:
           database_url: "postgres://postgres:postgres@localhost:5432/postgres"
           backup_file: "./db/asgard.dump"
-      - name: Sleep for 30 seconds
+      - name: Sleep for 5 seconds
         uses: jakejarvis/wait-action@master
         with:
           time: '5s'
