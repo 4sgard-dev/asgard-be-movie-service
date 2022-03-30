@@ -40,20 +40,26 @@ export class RatingController {
       });
     }
 
-    if (query.userId) {
+    if (query.userId || query.discordId) {
       return this.ratingRepository.find({
         relations: {
           movie: true,
         },
-        where: {
-          user: {
-            userId: query.userId,
+        where: [
+          {
+            user: {
+              userId: query.userId,
+            },
           },
-        },
+          {
+            user: {
+              discordId: query.discordId,
+            },
+          },
+        ],
         order: {
-          rating: 'DESC',
+          ratingId: 'DESC',
         },
-        take: 10,
       });
     }
   }

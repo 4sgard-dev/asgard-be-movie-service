@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { Transform, TransformFnParams } from 'class-transformer';
 
 export class RatingQuery {
@@ -11,4 +11,8 @@ export class RatingQuery {
   @IsNumber()
   @Transform((val: TransformFnParams) => parseInt(val.value))
   userId: number;
+
+  @IsOptional()
+  @IsString()
+  discordId: string;
 }
