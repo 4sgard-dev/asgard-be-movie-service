@@ -16,6 +16,7 @@ import { TmdbService } from './service/tmdb/tmdb.service';
 import { HttpModule } from '@nestjs/axios';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './controller/health/health.controller';
+import { CountController } from './controller/count/count.controller';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { HealthController } from './controller/health/health.controller';
     RatingController,
     UserController,
     EventController,
+    CountController,
     HealthController,
   ],
   providers: [AppService, MovieService, TmdbService],
