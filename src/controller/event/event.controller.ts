@@ -35,7 +35,9 @@ export class EventController {
   @Post()
   async createEvent(@Body() createEvent: CreateEvent) {
     const movieEntity = await this.movieRepository.findOneBy({
-      movieId: createEvent.movieId,
+      ...(createEvent.imdbId
+        ? { imdbId: createEvent.imdbId }
+        : { movieId: createEvent.movieId }),
     });
 
     if (!movieEntity) {
@@ -43,7 +45,7 @@ export class EventController {
     }
 
     const eventEntity = {
-      movieId: createEvent.movieId,
+      movieId: movieEntity.movieId,
       time: createEvent.eventDate,
     } as Event;
 

@@ -14,11 +14,12 @@ import {
 } from '@nestjs/common';
 import { Rating } from '../../entities/Rating';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Repository } from 'typeorm';
+import { Equal, FindOneOptions, Repository } from 'typeorm';
 import { UpdateRating } from '../dto/UpdateRating';
 import { CreateRating } from '../dto/CreateRating';
 import { User } from '../../entities/User';
 import { RatingQuery } from '../dto/RatingQuery';
+import { Movie } from '../../entities/Movie';
 
 @Controller('ratings')
 export class RatingController {
@@ -26,7 +27,9 @@ export class RatingController {
     @InjectRepository(Rating)
     private ratingRepository: Repository<Rating>,
     @InjectRepository(User)
-    private userRepostiory: Repository<User>,
+    private userRepository: Repository<User>,
+    @InjectRepository(Movie)
+    private movieRepository: Repository<Movie>,
   ) {}
 
   @Get()
@@ -122,11 +125,22 @@ export class RatingController {
     @Body() rating: CreateRating,
     @Headers('discord-id') discordId: string,
   ) {
+    const query: FindOneOptions<Rating> = rating.imdbId
+      ? { where: { movie: { imdbId: rating.imdbId } } }
+      : {
+          where: {
+            movieId: rating.movieId,
+            user: {
+              discordId: Equal(discordId),
+            },
+          },
+        };
+
     const ratingEntity: Rating = await this.ratingRepository.findOne({
       where: {
-        movieId: rating.movieId,
+        ...query.where,
         user: {
-          discordId: Equal(discordId),
+          discordId: discordId,
         },
       },
     });
@@ -135,7 +149,7 @@ export class RatingController {
       throw new HttpException('Conflict', HttpStatus.CONFLICT);
     }
 
-    const userEntity: User = await this.userRepostiory.findOne({
+    const userEntity: User = await this.userRepository.findOne({
       where: {
         discordId: Equal(discordId),
       },
@@ -145,9 +159,23 @@ export class RatingController {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
 
+    let movieId = rating.movieId;
+
+    if (rating.imdbId) {
+      const movie = await this.movieRepository.findOneBy({
+        imdbId: rating.imdbId,
+      });
+
+      if (!movie) {
+        throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+      }
+
+      movieId = movie.movieId;
+    }
+
     const ratingEntityPersist = {
       rating: rating.rating,
-      movieId: rating.movieId,
+      movieId,
       user: userEntity,
     };
 
