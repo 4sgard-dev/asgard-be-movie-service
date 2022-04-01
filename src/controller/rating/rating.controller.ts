@@ -20,6 +20,7 @@ import { CreateRating } from '../dto/CreateRating';
 import { User } from '../../entities/User';
 import { RatingQuery } from '../dto/RatingQuery';
 import { Movie } from '../../entities/Movie';
+import { RatingService } from '../../service/rating/rating.service';
 
 @Controller('ratings')
 export class RatingController {
@@ -30,10 +31,24 @@ export class RatingController {
     private userRepository: Repository<User>,
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
+    private ratingService: RatingService,
   ) {}
 
   @Get()
   async getRatingByMovieId(@Query() query: RatingQuery): Promise<Rating[]> {
+    if (query.unrated && !query.userId && !query.discordId) {
+      throw new HttpException(
+        'Unprocessable entity',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    if (query.unrated) {
+      return query.userId
+        ? this.ratingService.getUnratedMoviesByUserId(query.userId)
+        : this.ratingService.getUnratedMoviesByDiscordId(query.discordId);
+    }
+
     if (query.movieId) {
       return this.ratingRepository.find({
         relations: {

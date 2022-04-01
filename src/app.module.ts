@@ -17,6 +17,7 @@ import { HttpModule } from '@nestjs/axios';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './controller/health/health.controller';
 import { CountController } from './controller/count/count.controller';
+import { RatingService } from './service/rating/rating.service';
 
 @Module({
   imports: [
@@ -51,6 +52,6 @@ import { CountController } from './controller/count/count.controller';
     CountController,
     HealthController,
   ],
-  providers: [AppService, MovieService, TmdbService],
+  providers: [AppService, MovieService, TmdbService, RatingService],
 })
 export class AppModule {}

@@ -1,4 +1,10 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsBooleanString,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { Transform, TransformFnParams } from 'class-transformer';
 
 export class RatingQuery {
@@ -15,4 +21,16 @@ export class RatingQuery {
   @IsOptional()
   @IsString()
   discordId: string;
+
+  @IsOptional()
+  @IsBoolean()
+  @Transform((val: TransformFnParams) => {
+    return (
+      val.value === 'true' ||
+      val.value === true ||
+      val.value === 1 ||
+      val.value === '1'
+    );
+  })
+  unrated: boolean;
 }

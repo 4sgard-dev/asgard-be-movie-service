@@ -34,6 +34,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "sqlstring": "^2.3.3",
     "typeorm": "^0.3.4"
   },
   "devDependencies": {
@@ -43,6 +44,7 @@
     "@types/express": "^4.17.13",
     "@types/jest": "27.4.1",
     "@types/node": "^16.0.0",
+    "@types/sqlstring": "^2.3.0",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
