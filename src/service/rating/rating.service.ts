@@ -39,6 +39,7 @@ export class RatingService {
       .select('m.movie_id', 'movieId')
       .addSelect('m.name', 'name')
       .where(`m.movie_id NOT IN (${query})`)
+      .orderBy('m.movie_id', 'DESC')
       .getRawMany();
   }
 }
