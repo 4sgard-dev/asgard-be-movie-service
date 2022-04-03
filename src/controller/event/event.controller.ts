@@ -13,6 +13,7 @@ import { Repository } from 'typeorm';
 import { Event } from '../../entities/Event';
 import { CreateEvent } from '../dto/CreateEvent';
 import { Movie } from '../../entities/Movie';
+import { EventQuery } from '../dto/EventQuery';
 
 @Controller('events')
 export class EventController {
@@ -24,11 +25,18 @@ export class EventController {
   ) {}
 
   @Get()
-  async getRatingByMovieId(
-    @Query('movieId', ParseIntPipe) movieId: number,
-  ): Promise<Event[]> {
+  async getRatingByMovieId(@Query() query: EventQuery): Promise<Event[]> {
+    // Returns all events
+    if (!query.movieId) {
+      return this.eventRepository.find({
+        relations: {
+          movie: true,
+        },
+      });
+    }
+
     return this.eventRepository.find({
-      where: { movieId: movieId },
+      where: { movieId: query.movieId },
     });
   }
 
