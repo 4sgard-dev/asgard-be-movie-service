@@ -35,7 +35,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "sqlstring": "^2.3.3",
-    "typeorm": "^0.3.4"
+    "typeorm": "^0.3.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.4",
