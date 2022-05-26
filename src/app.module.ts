@@ -18,6 +18,8 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './controller/health/health.controller';
 import { CountController } from './controller/count/count.controller';
 import { RatingService } from './service/rating/rating.service';
+import { Suggestion } from './entities/Suggestion';
+import { SuggestionController } from './controller/suggestion/suggestion.controller';
 
 @Module({
   imports: [
@@ -39,7 +41,7 @@ import { RatingService } from './service/rating/rating.service';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Movie, User, Rating, Event]),
+    TypeOrmModule.forFeature([Movie, User, Rating, Event, Suggestion]),
     HttpModule,
     TerminusModule,
   ],
@@ -50,6 +52,7 @@ import { RatingService } from './service/rating/rating.service';
     UserController,
     EventController,
     CountController,
+    SuggestionController,
     HealthController,
   ],
   providers: [AppService, MovieService, TmdbService, RatingService],
