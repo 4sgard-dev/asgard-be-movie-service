@@ -1,10 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Headers,
   HttpException,
   HttpStatus,
+  Param,
   Post,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -86,5 +88,20 @@ export class SuggestionController {
     await this.suggestionRepository.save(movieEntityPersist);
 
     return;
+  }
+
+  @Delete(':id')
+  async deleteSuggestion(@Param('id') imdbId: string) {
+    const suggestion = await this.suggestionRepository.findOne({
+      where: { imdbId },
+    });
+
+    if (!suggestion) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    await this.suggestionRepository.delete({ imdbId });
+
+    return suggestion;
   }
 }
