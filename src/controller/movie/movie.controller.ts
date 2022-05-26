@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -18,12 +19,15 @@ import { UpdateRating } from '../dto/UpdateRating';
 import { CreateMovie } from '../dto/CreateMovie';
 import { TmdbService } from '../../service/tmdb/tmdb.service';
 import { MovieQuery } from '../dto/MovieQuery';
+import { Suggestion } from '../../entities/Suggestion';
 
 @Controller('movies')
 export class MovieController {
   constructor(
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
+    @InjectRepository(Suggestion)
+    private suggestionRepository: Repository<Suggestion>,
     private movieService: MovieService,
     private tmdbService: TmdbService,
   ) {}
@@ -80,6 +84,19 @@ export class MovieController {
     return movie;
   }
 
+  @Delete(':id')
+  async deleteMovie(@Param('id', ParseIntPipe) id: number) {
+    const movie = await this.movieRepository.findBy({ movieId: id });
+
+    if (!movie) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    await this.movieRepository.delete(id);
+
+    return movie;
+  }
+
   @Post()
   async createMovie(@Body() movie: CreateMovie) {
     const movieEntity = await this.movieRepository.findOneBy({
@@ -97,6 +114,8 @@ export class MovieController {
     if (!imdbMovie) {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
+
+    await this.suggestionRepository.delete({ imdbId: movie.imdbId });
 
     console.log(imdbMovie);
 
