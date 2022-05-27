@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
+  Param,
   ParseIntPipe,
   Post,
   Query,
@@ -58,5 +60,18 @@ export class EventController {
     } as Event;
 
     return this.eventRepository.save(eventEntity);
+  }
+
+  @Delete(':id')
+  async deleteEvent(@Param('id', ParseIntPipe) eventId: number) {
+    const eventEntity = await this.eventRepository.findOneBy({
+      eventId,
+    });
+
+    if (!eventEntity) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.eventRepository.remove(eventEntity);
   }
 }
