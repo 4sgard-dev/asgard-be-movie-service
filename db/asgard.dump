@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.22
 -- Dumped by pg_dump version 14.2
 
--- Started on 2022-05-26 19:57:42
+-- Started on 2022-06-05 22:50:08
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -27,7 +27,7 @@ CREATE EXTENSION IF NOT EXISTS plv8 WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 3546 (class 0 OID 0)
+-- TOC entry 3558 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plv8; Type: COMMENT; Schema: -; Owner: 
 --
@@ -44,7 +44,7 @@ CREATE EXTENSION IF NOT EXISTS btree_gin WITH SCHEMA public;
 
 
 --
--- TOC entry 3547 (class 0 OID 0)
+-- TOC entry 3559 (class 0 OID 0)
 -- Dependencies: 10
 -- Name: EXTENSION btree_gin; Type: COMMENT; Schema: -; Owner: 
 --
@@ -61,7 +61,7 @@ CREATE EXTENSION IF NOT EXISTS btree_gist WITH SCHEMA public;
 
 
 --
--- TOC entry 3548 (class 0 OID 0)
+-- TOC entry 3560 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: EXTENSION btree_gist; Type: COMMENT; Schema: -; Owner: 
 --
@@ -78,7 +78,7 @@ CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 
 
 --
--- TOC entry 3549 (class 0 OID 0)
+-- TOC entry 3561 (class 0 OID 0)
 -- Dependencies: 17
 -- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: 
 --
@@ -95,7 +95,7 @@ CREATE EXTENSION IF NOT EXISTS cube WITH SCHEMA public;
 
 
 --
--- TOC entry 3550 (class 0 OID 0)
+-- TOC entry 3562 (class 0 OID 0)
 -- Dependencies: 8
 -- Name: EXTENSION cube; Type: COMMENT; Schema: -; Owner: 
 --
@@ -112,7 +112,7 @@ CREATE EXTENSION IF NOT EXISTS dblink WITH SCHEMA public;
 
 
 --
--- TOC entry 3551 (class 0 OID 0)
+-- TOC entry 3563 (class 0 OID 0)
 -- Dependencies: 23
 -- Name: EXTENSION dblink; Type: COMMENT; Schema: -; Owner: 
 --
@@ -129,7 +129,7 @@ CREATE EXTENSION IF NOT EXISTS dict_int WITH SCHEMA public;
 
 
 --
--- TOC entry 3552 (class 0 OID 0)
+-- TOC entry 3564 (class 0 OID 0)
 -- Dependencies: 11
 -- Name: EXTENSION dict_int; Type: COMMENT; Schema: -; Owner: 
 --
@@ -146,7 +146,7 @@ CREATE EXTENSION IF NOT EXISTS dict_xsyn WITH SCHEMA public;
 
 
 --
--- TOC entry 3553 (class 0 OID 0)
+-- TOC entry 3565 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: EXTENSION dict_xsyn; Type: COMMENT; Schema: -; Owner: 
 --
@@ -163,7 +163,7 @@ CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public;
 
 
 --
--- TOC entry 3554 (class 0 OID 0)
+-- TOC entry 3566 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: EXTENSION earthdistance; Type: COMMENT; Schema: -; Owner: 
 --
@@ -180,7 +180,7 @@ CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
 
 
 --
--- TOC entry 3555 (class 0 OID 0)
+-- TOC entry 3567 (class 0 OID 0)
 -- Dependencies: 18
 -- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: 
 --
@@ -197,7 +197,7 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 
 
 --
--- TOC entry 3556 (class 0 OID 0)
+-- TOC entry 3568 (class 0 OID 0)
 -- Dependencies: 12
 -- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
 --
@@ -214,7 +214,7 @@ CREATE EXTENSION IF NOT EXISTS intarray WITH SCHEMA public;
 
 
 --
--- TOC entry 3557 (class 0 OID 0)
+-- TOC entry 3569 (class 0 OID 0)
 -- Dependencies: 13
 -- Name: EXTENSION intarray; Type: COMMENT; Schema: -; Owner: 
 --
@@ -231,7 +231,7 @@ CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
 
 
 --
--- TOC entry 3558 (class 0 OID 0)
+-- TOC entry 3570 (class 0 OID 0)
 -- Dependencies: 21
 -- Name: EXTENSION ltree; Type: COMMENT; Schema: -; Owner: 
 --
@@ -248,7 +248,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
 
 
 --
--- TOC entry 3559 (class 0 OID 0)
+-- TOC entry 3571 (class 0 OID 0)
 -- Dependencies: 3
 -- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: 
 --
@@ -265,7 +265,7 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
 
 
 --
--- TOC entry 3560 (class 0 OID 0)
+-- TOC entry 3572 (class 0 OID 0)
 -- Dependencies: 14
 -- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: 
 --
@@ -282,7 +282,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 
 
 --
--- TOC entry 3561 (class 0 OID 0)
+-- TOC entry 3573 (class 0 OID 0)
 -- Dependencies: 15
 -- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
 --
@@ -299,7 +299,7 @@ CREATE EXTENSION IF NOT EXISTS pgrowlocks WITH SCHEMA public;
 
 
 --
--- TOC entry 3562 (class 0 OID 0)
+-- TOC entry 3574 (class 0 OID 0)
 -- Dependencies: 9
 -- Name: EXTENSION pgrowlocks; Type: COMMENT; Schema: -; Owner: 
 --
@@ -316,7 +316,7 @@ CREATE EXTENSION IF NOT EXISTS pgstattuple WITH SCHEMA public;
 
 
 --
--- TOC entry 3563 (class 0 OID 0)
+-- TOC entry 3575 (class 0 OID 0)
 -- Dependencies: 20
 -- Name: EXTENSION pgstattuple; Type: COMMENT; Schema: -; Owner: 
 --
@@ -333,7 +333,7 @@ CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
 
 
 --
--- TOC entry 3564 (class 0 OID 0)
+-- TOC entry 3576 (class 0 OID 0)
 -- Dependencies: 19
 -- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner: 
 --
@@ -350,7 +350,7 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 
 
 --
--- TOC entry 3565 (class 0 OID 0)
+-- TOC entry 3577 (class 0 OID 0)
 -- Dependencies: 4
 -- Name: EXTENSION unaccent; Type: COMMENT; Schema: -; Owner: 
 --
@@ -367,7 +367,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- TOC entry 3566 (class 0 OID 0)
+-- TOC entry 3578 (class 0 OID 0)
 -- Dependencies: 16
 -- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
 --
@@ -384,7 +384,7 @@ CREATE EXTENSION IF NOT EXISTS xml2 WITH SCHEMA public;
 
 
 --
--- TOC entry 3567 (class 0 OID 0)
+-- TOC entry 3579 (class 0 OID 0)
 -- Dependencies: 22
 -- Name: EXTENSION xml2; Type: COMMENT; Schema: -; Owner: 
 --
@@ -423,7 +423,7 @@ CREATE SEQUENCE public.attendee_event_id_seq
 ALTER TABLE public.attendee_event_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3568 (class 0 OID 0)
+-- TOC entry 3580 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: attendee_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -447,7 +447,7 @@ CREATE SEQUENCE public.attendee_user_id_seq
 ALTER TABLE public.attendee_user_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3569 (class 0 OID 0)
+-- TOC entry 3581 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: attendee_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -485,7 +485,7 @@ CREATE SEQUENCE public.event_event_id_seq
 ALTER TABLE public.event_event_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3570 (class 0 OID 0)
+-- TOC entry 3582 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: event_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -509,7 +509,7 @@ CREATE SEQUENCE public.event_movie_id_seq
 ALTER TABLE public.event_movie_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3571 (class 0 OID 0)
+-- TOC entry 3583 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: event_movie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -548,7 +548,7 @@ CREATE SEQUENCE public.movie_movie_id_seq
 ALTER TABLE public.movie_movie_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3572 (class 0 OID 0)
+-- TOC entry 3584 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: movie_movie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -588,7 +588,7 @@ CREATE SEQUENCE public.rating_rating_id_seq
 ALTER TABLE public.rating_rating_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3573 (class 0 OID 0)
+-- TOC entry 3585 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: rating_rating_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -625,7 +625,7 @@ CREATE SEQUENCE public.role_role_id_seq
 ALTER TABLE public.role_role_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3574 (class 0 OID 0)
+-- TOC entry 3586 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: role_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -666,7 +666,7 @@ CREATE SEQUENCE public.suggestion_suggestion_id_seq
 ALTER TABLE public.suggestion_suggestion_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3575 (class 0 OID 0)
+-- TOC entry 3587 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: suggestion_suggestion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -718,7 +718,7 @@ CREATE SEQUENCE public.user_user_id_seq
 ALTER TABLE public.user_user_id_seq OWNER TO whzftvja;
 
 --
--- TOC entry 3576 (class 0 OID 0)
+-- TOC entry 3588 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: user_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
 --
@@ -727,7 +727,48 @@ ALTER SEQUENCE public.user_user_id_seq OWNED BY public."user".user_id;
 
 
 --
--- TOC entry 3387 (class 2604 OID 12476038)
+-- TOC entry 230 (class 1259 OID 13208086)
+-- Name: vote; Type: TABLE; Schema: public; Owner: whzftvja
+--
+
+CREATE TABLE public.vote (
+    vote_id integer NOT NULL,
+    suggestion_id integer NOT NULL,
+    user_id integer,
+    interest boolean NOT NULL,
+    comment text,
+    created timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.vote OWNER TO whzftvja;
+
+--
+-- TOC entry 229 (class 1259 OID 13208084)
+-- Name: vote_vote_id_seq; Type: SEQUENCE; Schema: public; Owner: whzftvja
+--
+
+CREATE SEQUENCE public.vote_vote_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.vote_vote_id_seq OWNER TO whzftvja;
+
+--
+-- TOC entry 3589 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: vote_vote_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: whzftvja
+--
+
+ALTER SEQUENCE public.vote_vote_id_seq OWNED BY public.vote.vote_id;
+
+
+--
+-- TOC entry 3394 (class 2604 OID 12476038)
 -- Name: attendee event_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -735,7 +776,7 @@ ALTER TABLE ONLY public.attendee ALTER COLUMN event_id SET DEFAULT nextval('publ
 
 
 --
--- TOC entry 3388 (class 2604 OID 12476039)
+-- TOC entry 3395 (class 2604 OID 12476039)
 -- Name: attendee user_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -743,7 +784,7 @@ ALTER TABLE ONLY public.attendee ALTER COLUMN user_id SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3389 (class 2604 OID 12476040)
+-- TOC entry 3396 (class 2604 OID 12476040)
 -- Name: event event_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -751,7 +792,7 @@ ALTER TABLE ONLY public.event ALTER COLUMN event_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3390 (class 2604 OID 12476041)
+-- TOC entry 3397 (class 2604 OID 12476041)
 -- Name: event movie_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -759,7 +800,7 @@ ALTER TABLE ONLY public.event ALTER COLUMN movie_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3392 (class 2604 OID 12476042)
+-- TOC entry 3399 (class 2604 OID 12476042)
 -- Name: movie movie_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -767,7 +808,7 @@ ALTER TABLE ONLY public.movie ALTER COLUMN movie_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3393 (class 2604 OID 12476043)
+-- TOC entry 3400 (class 2604 OID 12476043)
 -- Name: rating rating_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -775,7 +816,7 @@ ALTER TABLE ONLY public.rating ALTER COLUMN rating_id SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3394 (class 2604 OID 12476044)
+-- TOC entry 3401 (class 2604 OID 12476044)
 -- Name: role role_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -783,7 +824,7 @@ ALTER TABLE ONLY public.role ALTER COLUMN role_id SET DEFAULT nextval('public.ro
 
 
 --
--- TOC entry 3396 (class 2604 OID 13146355)
+-- TOC entry 3403 (class 2604 OID 13146355)
 -- Name: suggestion suggestion_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -791,7 +832,7 @@ ALTER TABLE ONLY public.suggestion ALTER COLUMN suggestion_id SET DEFAULT nextva
 
 
 --
--- TOC entry 3395 (class 2604 OID 12476045)
+-- TOC entry 3402 (class 2604 OID 12476045)
 -- Name: user user_id; Type: DEFAULT; Schema: public; Owner: whzftvja
 --
 
@@ -799,7 +840,15 @@ ALTER TABLE ONLY public."user" ALTER COLUMN user_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3398 (class 2606 OID 12476047)
+-- TOC entry 3404 (class 2604 OID 13208089)
+-- Name: vote vote_id; Type: DEFAULT; Schema: public; Owner: whzftvja
+--
+
+ALTER TABLE ONLY public.vote ALTER COLUMN vote_id SET DEFAULT nextval('public.vote_vote_id_seq'::regclass);
+
+
+--
+-- TOC entry 3406 (class 2606 OID 12476047)
 -- Name: attendee attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -808,7 +857,7 @@ ALTER TABLE ONLY public.attendee
 
 
 --
--- TOC entry 3402 (class 2606 OID 12476049)
+-- TOC entry 3410 (class 2606 OID 12476049)
 -- Name: event event_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -817,7 +866,7 @@ ALTER TABLE ONLY public.event
 
 
 --
--- TOC entry 3404 (class 2606 OID 12476051)
+-- TOC entry 3412 (class 2606 OID 12476051)
 -- Name: movie movie_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -826,7 +875,7 @@ ALTER TABLE ONLY public.movie
 
 
 --
--- TOC entry 3406 (class 2606 OID 12476053)
+-- TOC entry 3414 (class 2606 OID 12476053)
 -- Name: rating rating_id_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -835,7 +884,7 @@ ALTER TABLE ONLY public.rating
 
 
 --
--- TOC entry 3408 (class 2606 OID 12476055)
+-- TOC entry 3416 (class 2606 OID 12476055)
 -- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -844,7 +893,7 @@ ALTER TABLE ONLY public.role
 
 
 --
--- TOC entry 3414 (class 2606 OID 13146360)
+-- TOC entry 3422 (class 2606 OID 13146360)
 -- Name: suggestion suggestion_pk; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -853,7 +902,7 @@ ALTER TABLE ONLY public.suggestion
 
 
 --
--- TOC entry 3410 (class 2606 OID 12476057)
+-- TOC entry 3418 (class 2606 OID 12476057)
 -- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -862,7 +911,7 @@ ALTER TABLE ONLY public."user"
 
 
 --
--- TOC entry 3412 (class 2606 OID 12476059)
+-- TOC entry 3420 (class 2606 OID 12476059)
 -- Name: user_roles user_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -871,7 +920,16 @@ ALTER TABLE ONLY public.user_roles
 
 
 --
--- TOC entry 3399 (class 1259 OID 12476060)
+-- TOC entry 3424 (class 2606 OID 13208094)
+-- Name: vote vote_pk; Type: CONSTRAINT; Schema: public; Owner: whzftvja
+--
+
+ALTER TABLE ONLY public.vote
+    ADD CONSTRAINT vote_pk PRIMARY KEY (vote_id);
+
+
+--
+-- TOC entry 3407 (class 1259 OID 12476060)
 -- Name: fki_event_id_to_event; Type: INDEX; Schema: public; Owner: whzftvja
 --
 
@@ -879,7 +937,7 @@ CREATE INDEX fki_event_id_to_event ON public.attendee USING btree (event_id);
 
 
 --
--- TOC entry 3400 (class 1259 OID 12476061)
+-- TOC entry 3408 (class 1259 OID 12476061)
 -- Name: fki_user_id_to_user; Type: INDEX; Schema: public; Owner: whzftvja
 --
 
@@ -887,7 +945,7 @@ CREATE INDEX fki_user_id_to_user ON public.attendee USING btree (user_id);
 
 
 --
--- TOC entry 3415 (class 2606 OID 12476062)
+-- TOC entry 3425 (class 2606 OID 12476062)
 -- Name: attendee attendee_event_id_to_event; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -896,7 +954,7 @@ ALTER TABLE ONLY public.attendee
 
 
 --
--- TOC entry 3416 (class 2606 OID 12476067)
+-- TOC entry 3426 (class 2606 OID 12476067)
 -- Name: attendee attendee_user_id_to_user; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -905,7 +963,7 @@ ALTER TABLE ONLY public.attendee
 
 
 --
--- TOC entry 3417 (class 2606 OID 12476072)
+-- TOC entry 3427 (class 2606 OID 12476072)
 -- Name: event event_movie_id_to_movie; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -914,7 +972,7 @@ ALTER TABLE ONLY public.event
 
 
 --
--- TOC entry 3418 (class 2606 OID 12476077)
+-- TOC entry 3428 (class 2606 OID 12476077)
 -- Name: rating rating_movie_id_to_movie; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -923,7 +981,7 @@ ALTER TABLE ONLY public.rating
 
 
 --
--- TOC entry 3419 (class 2606 OID 12476082)
+-- TOC entry 3429 (class 2606 OID 12476082)
 -- Name: rating rating_user_id_to_user; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -932,7 +990,7 @@ ALTER TABLE ONLY public.rating
 
 
 --
--- TOC entry 3422 (class 2606 OID 13146361)
+-- TOC entry 3432 (class 2606 OID 13146361)
 -- Name: suggestion suggestion_user_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -941,7 +999,7 @@ ALTER TABLE ONLY public.suggestion
 
 
 --
--- TOC entry 3420 (class 2606 OID 12476087)
+-- TOC entry 3430 (class 2606 OID 12476087)
 -- Name: user_roles user_roles_role_id_to_role; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -950,7 +1008,7 @@ ALTER TABLE ONLY public.user_roles
 
 
 --
--- TOC entry 3421 (class 2606 OID 12476092)
+-- TOC entry 3431 (class 2606 OID 12476092)
 -- Name: user_roles user_roles_user_id_to_user; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
 --
 
@@ -958,7 +1016,25 @@ ALTER TABLE ONLY public.user_roles
     ADD CONSTRAINT user_roles_user_id_to_user FOREIGN KEY (user_id) REFERENCES public."user"(user_id);
 
 
--- Completed on 2022-05-26 19:59:08
+--
+-- TOC entry 3434 (class 2606 OID 13209224)
+-- Name: vote vote_suggestion_suggestion_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
+--
+
+ALTER TABLE ONLY public.vote
+    ADD CONSTRAINT vote_suggestion_suggestion_id_fk FOREIGN KEY (suggestion_id) REFERENCES public.suggestion(suggestion_id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3433 (class 2606 OID 13208100)
+-- Name: vote vote_user_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: whzftvja
+--
+
+ALTER TABLE ONLY public.vote
+    ADD CONSTRAINT vote_user_user_id_fk FOREIGN KEY (user_id) REFERENCES public."user"(user_id);
+
+
+-- Completed on 2022-06-05 22:51:44
 
 --
 -- PostgreSQL database dump complete
