@@ -20,6 +20,7 @@ import { CountController } from './controller/count/count.controller';
 import { RatingService } from './service/rating/rating.service';
 import { Suggestion } from './entities/Suggestion';
 import { SuggestionController } from './controller/suggestion/suggestion.controller';
+import { Vote } from './entities/Vote';
 
 @Module({
   imports: [
@@ -41,7 +42,7 @@ import { SuggestionController } from './controller/suggestion/suggestion.control
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Movie, User, Rating, Event, Suggestion]),
+    TypeOrmModule.forFeature([Movie, User, Rating, Event, Suggestion, Vote]),
     HttpModule,
     TerminusModule,
   ],
