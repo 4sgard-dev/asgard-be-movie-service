@@ -7,9 +7,7 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Post,
-  Put,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from '../../entities/Movie';
@@ -19,8 +17,6 @@ import { TmdbService } from '../../service/tmdb/tmdb.service';
 import { Suggestion } from '../../entities/Suggestion';
 import { CreateSuggestion } from '../dto/CreateSuggestion';
 import { User } from '../../entities/User';
-import { CreateVote } from '../dto/CreateVote';
-import { Vote } from '../../entities/Vote';
 
 @Controller('suggestions')
 export class SuggestionController {
@@ -31,55 +27,13 @@ export class SuggestionController {
     private movieRepository: Repository<Movie>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    @InjectRepository(Vote)
-    private voteRepository: Repository<Vote>,
     private movieService: MovieService,
     private tmdbService: TmdbService,
   ) {}
 
   @Get()
   async getSuggestions() {
-    return (
-      this.suggestionRepository
-        .createQueryBuilder('s')
-        //.select('s.*')
-        .addSelect('interested.interested', 's_interested')
-        .addSelect('not_interested.not_interested', 's_notInterested')
-        .leftJoinAndSelect('s.user', 'user')
-        .leftJoin(
-          (qb) =>
-            qb
-              .select('v.suggestion_id')
-              .addSelect('count(*)', 'interested')
-              .from(Vote, 'v')
-              .where('v.interest = :interest', { interest: true })
-              .groupBy('v.suggestion_id'),
-          'interested',
-          'interested.suggestion_id = s.suggestion_id',
-        )
-        .leftJoin(
-          (qb) =>
-            qb
-              .select('v.suggestion_id')
-              .addSelect('count(*)', 'not_interested')
-              .from(Vote, 'v')
-              .where('v.interest = :not_interest', { not_interest: false })
-              .groupBy('v.suggestion_id'),
-          'not_interested',
-          'not_interested.suggestion_id = s.suggestion_id',
-        )
-        .leftJoinAndSelect(
-          's.votes',
-          'votes',
-          'votes.suggestion_id = s.suggestion_id',
-        )
-        .leftJoinAndSelect('votes.user', 'vu', 'vu.user_id = votes.user_id')
-        .getMany()
-    );
-
-    return this.suggestionRepository.find({
-      relations: { user: true, votes: true },
-    });
+    return this.suggestionRepository.find({ relations: { user: true } });
   }
 
   @Post()
@@ -149,68 +103,5 @@ export class SuggestionController {
     await this.suggestionRepository.delete({ imdbId });
 
     return suggestion;
-  }
-
-  @Get(':id/votes')
-  async getVotes(@Param('id', ParseIntPipe) suggestionId: number) {
-    const suggestion = await this.suggestionRepository.findOne({
-      where: { suggestionId: suggestionId },
-    });
-
-    if (!suggestion) {
-      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
-    }
-
-    return this.voteRepository.find({
-      where: { suggestion: Equal(suggestion) },
-    });
-  }
-
-  @Put(':id/votes')
-  async updateVote(
-    @Body() vote: CreateVote,
-    @Param('id', ParseIntPipe) suggestionId: number,
-    @Headers('discord-id') discordId: string,
-  ) {
-    const suggestion = await this.suggestionRepository.findOne({
-      where: { suggestionId: suggestionId },
-    });
-
-    if (!suggestion) {
-      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
-    }
-
-    const userEntity: User = await this.userRepository.findOne({
-      where: {
-        discordId: Equal(discordId),
-      },
-    });
-
-    if (!userEntity) {
-      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
-    }
-
-    const voteEntityPersist = {
-      suggestion,
-      user: userEntity,
-      interest: vote.interest,
-      created: new Date(),
-    } as Vote;
-
-    const voteEntity = await this.voteRepository.findOne({
-      where: {
-        suggestion: Equal(suggestion),
-        user: Equal(userEntity),
-      },
-    });
-
-    if (voteEntity) {
-      await this.voteRepository.update(
-        { voteId: voteEntity.voteId },
-        { voteId: voteEntity.voteId, ...voteEntityPersist },
-      );
-    } else {
-      await this.voteRepository.save(voteEntityPersist);
-    }
   }
 }

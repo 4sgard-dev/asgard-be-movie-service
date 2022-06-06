@@ -4,12 +4,9 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './User';
-import { Vote } from './Vote';
-import { ColumnNumericTransformer } from '../utils/utils';
 
 @Index('suggestion_pkey', ['suggestionId'], { unique: true })
 @Entity('suggestion', { schema: 'public' })
@@ -34,15 +31,6 @@ export class Suggestion {
   @JoinColumn([{ name: 'user_id', referencedColumnName: 'userId' }])
   user: User;
 
-  @OneToMany(() => Vote, (vote) => vote.suggestion)
-  votes: Vote[];
-
   @Column('timestamp with time zone', { name: 'created' })
   created: Date;
-
-  @Column({ select: false, transformer: new ColumnNumericTransformer() })
-  interested: number;
-
-  @Column({ select: false, transformer: new ColumnNumericTransformer() })
-  notInterested: number;
 }
