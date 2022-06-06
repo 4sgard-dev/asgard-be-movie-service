@@ -39,47 +39,48 @@ export class SuggestionController {
 
   @Get()
   async getSuggestions() {
-    return (
-      this.suggestionRepository
-        .createQueryBuilder('s')
-        //.select('s.*')
-        .addSelect('interested.interested', 's_interested')
-        .addSelect('not_interested.not_interested', 's_notInterested')
-        .leftJoinAndSelect('s.user', 'user')
-        .leftJoin(
-          (qb) =>
-            qb
-              .select('v.suggestion_id')
-              .addSelect('count(*)', 'interested')
-              .from(Vote, 'v')
-              .where('v.interest = :interest', { interest: true })
-              .groupBy('v.suggestion_id'),
-          'interested',
-          'interested.suggestion_id = s.suggestion_id',
-        )
-        .leftJoin(
-          (qb) =>
-            qb
-              .select('v.suggestion_id')
-              .addSelect('count(*)', 'not_interested')
-              .from(Vote, 'v')
-              .where('v.interest = :not_interest', { not_interest: false })
-              .groupBy('v.suggestion_id'),
-          'not_interested',
-          'not_interested.suggestion_id = s.suggestion_id',
-        )
-        .leftJoinAndSelect(
-          's.votes',
-          'votes',
-          'votes.suggestion_id = s.suggestion_id',
-        )
-        .leftJoinAndSelect('votes.user', 'vu', 'vu.user_id = votes.user_id')
-        .getMany()
-    );
+    const { raw, entities } = await this.suggestionRepository
+      .createQueryBuilder('s')
+      //.select('s.*')
+      .addSelect('interested.interested', 's_interested')
+      .addSelect('not_interested.not_interested', 's_notInterested')
+      .leftJoinAndSelect('s.user', 'user')
+      .leftJoin(
+        (qb) =>
+          qb
+            .select('v.suggestion_id')
+            .addSelect('count(*)', 'interested')
+            .from(Vote, 'v')
+            .where('v.interest = :interest', { interest: true })
+            .groupBy('v.suggestion_id'),
+        'interested',
+        'interested.suggestion_id = s.suggestion_id',
+      )
+      .leftJoin(
+        (qb) =>
+          qb
+            .select('v.suggestion_id')
+            .addSelect('count(*)', 'not_interested')
+            .from(Vote, 'v')
+            .where('v.interest = :not_interest', { not_interest: false })
+            .groupBy('v.suggestion_id'),
+        'not_interested',
+        'not_interested.suggestion_id = s.suggestion_id',
+      )
+      .leftJoinAndSelect(
+        's.votes',
+        'votes',
+        'votes.suggestion_id = s.suggestion_id',
+      )
+      .leftJoinAndSelect('votes.user', 'vu', 'vu.user_id = votes.user_id')
+      .getRawAndEntities();
 
-    return this.suggestionRepository.find({
-      relations: { user: true, votes: true },
-    });
+    for (let i = 0; i < entities.length; i++) {
+      entities[i].interested = +raw[i].s_interested;
+      entities[i].notInterested = +raw[i].s_notInterested || 0;
+    }
+
+    return entities;
   }
 
   @Post()

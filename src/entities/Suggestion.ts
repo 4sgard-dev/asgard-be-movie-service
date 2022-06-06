@@ -40,9 +40,7 @@ export class Suggestion {
   @Column('timestamp with time zone', { name: 'created' })
   created: Date;
 
-  @Column({ select: false, transformer: new ColumnNumericTransformer() })
   interested: number;
 
-  @Column({ select: false, transformer: new ColumnNumericTransformer() })
   notInterested: number;
 }
