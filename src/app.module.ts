@@ -21,6 +21,7 @@ import { RatingService } from './service/rating/rating.service';
 import { Suggestion } from './entities/Suggestion';
 import { SuggestionController } from './controller/suggestion/suggestion.controller';
 import { Vote } from './entities/Vote';
+import { DaprService } from './service/dapr/dapr.service';
 
 @Module({
   imports: [
@@ -56,6 +57,12 @@ import { Vote } from './entities/Vote';
     SuggestionController,
     HealthController,
   ],
-  providers: [AppService, MovieService, TmdbService, RatingService],
+  providers: [
+    AppService,
+    MovieService,
+    TmdbService,
+    RatingService,
+    DaprService,
+  ],
 })
 export class AppModule {}

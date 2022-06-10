@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   HttpException,
   HttpStatus,
   Param,
@@ -20,6 +21,8 @@ import { CreateMovie } from '../dto/CreateMovie';
 import { TmdbService } from '../../service/tmdb/tmdb.service';
 import { MovieQuery } from '../dto/MovieQuery';
 import { Suggestion } from '../../entities/Suggestion';
+import { EventGridBuilder, EventType } from '../../utils/event.utils';
+import { DaprService } from '../../service/dapr/dapr.service';
 
 @Controller('movies')
 export class MovieController {
@@ -30,6 +33,7 @@ export class MovieController {
     private suggestionRepository: Repository<Suggestion>,
     private movieService: MovieService,
     private tmdbService: TmdbService,
+    private daprService: DaprService,
   ) {}
 
   @Get()
@@ -85,8 +89,11 @@ export class MovieController {
   }
 
   @Delete(':id')
-  async deleteMovie(@Param('id', ParseIntPipe) id: number) {
-    const movie = await this.movieRepository.findBy({ movieId: id });
+  async deleteMovie(
+    @Param('id', ParseIntPipe) id: number,
+    @Headers('discord-id') discordId: string,
+  ) {
+    const movie = await this.movieRepository.findOneBy({ movieId: id });
 
     if (!movie) {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
@@ -94,11 +101,24 @@ export class MovieController {
 
     await this.movieRepository.delete(id);
 
+    const egEvent = EventGridBuilder.build(EventType.MovieDeleted, 'movie', {
+      discordId,
+      name: movie.name,
+      imdbId: movie.imdbId,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
+
     return movie;
   }
 
   @Post()
-  async createMovie(@Body() movie: CreateMovie) {
+  async createMovie(
+    @Body() movie: CreateMovie,
+    @Headers('discord-id') discordId: string,
+  ) {
     const movieEntity = await this.movieRepository.findOneBy({
       imdbId: movie.imdbId,
     });
@@ -126,6 +146,16 @@ export class MovieController {
     } as Movie;
 
     await this.movieRepository.save(movieEntityPersist);
+
+    const egEvent = EventGridBuilder.build(EventType.MovieCreated, 'movie', {
+      discordId,
+      name: imdbMovie.title,
+      imdbId: imdbMovie.id,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
 
     return;
   }

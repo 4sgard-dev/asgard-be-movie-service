@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   HttpException,
   HttpStatus,
   Param,
@@ -16,6 +17,8 @@ import { Event } from '../../entities/Event';
 import { CreateEvent } from '../dto/CreateEvent';
 import { Movie } from '../../entities/Movie';
 import { EventQuery } from '../dto/EventQuery';
+import { EventGridBuilder, EventType } from '../../utils/event.utils';
+import { DaprService } from '../../service/dapr/dapr.service';
 
 @Controller('events')
 export class EventController {
@@ -24,6 +27,7 @@ export class EventController {
     private eventRepository: Repository<Event>,
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
+    private daprService: DaprService,
   ) {}
 
   @Get()
@@ -43,7 +47,10 @@ export class EventController {
   }
 
   @Post()
-  async createEvent(@Body() createEvent: CreateEvent) {
+  async createEvent(
+    @Body() createEvent: CreateEvent,
+    @Headers('discord-id') discordId: string,
+  ) {
     const movieEntity = await this.movieRepository.findOneBy({
       ...(createEvent.imdbId
         ? { imdbId: createEvent.imdbId }
@@ -59,11 +66,30 @@ export class EventController {
       time: createEvent.eventDate,
     } as Event;
 
-    return this.eventRepository.save(eventEntity);
+    const entitySaved = await this.eventRepository.save(eventEntity);
+
+    const egEvent = EventGridBuilder.build(EventType.EventCreated, 'event', {
+      eventId: eventEntity.eventId,
+      movie: {
+        movieId: movieEntity.movieId,
+        imdbId: movieEntity.imdbId,
+        title: movieEntity.name,
+      },
+      discordId,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
+
+    return entitySaved;
   }
 
   @Delete(':id')
-  async deleteEvent(@Param('id', ParseIntPipe) eventId: number) {
+  async deleteEvent(
+    @Param('id', ParseIntPipe) eventId: number,
+    @Headers('discord-id') discordId: string,
+  ) {
     const eventEntity = await this.eventRepository.findOneBy({
       eventId,
     });
@@ -72,6 +98,18 @@ export class EventController {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
 
-    return this.eventRepository.remove(eventEntity);
+    const eventRemoved = await this.eventRepository.remove(eventEntity);
+
+    const egEvent = EventGridBuilder.build(EventType.EventDeleted, 'event', {
+      eventId: eventEntity.eventId,
+      movieId: eventEntity.movieId,
+      discordId,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
+
+    return eventRemoved;
   }
 }

@@ -21,6 +21,8 @@ import { User } from '../../entities/User';
 import { RatingQuery } from '../dto/RatingQuery';
 import { Movie } from '../../entities/Movie';
 import { RatingService } from '../../service/rating/rating.service';
+import { EventGridBuilder, EventType } from '../../utils/event.utils';
+import { DaprService } from '../../service/dapr/dapr.service';
 
 @Controller('ratings')
 export class RatingController {
@@ -32,6 +34,7 @@ export class RatingController {
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
     private ratingService: RatingService,
+    private daprService: DaprService,
   ) {}
 
   @Get()
@@ -105,6 +108,14 @@ export class RatingController {
     }
 
     await this.ratingRepository.delete({ ratingId: id });
+
+    const egEvent = EventGridBuilder.build(EventType.RatingDeleted, 'rating', {
+      ...ratingEntity,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
   }
 
   @Put(':id')
@@ -133,6 +144,14 @@ export class RatingController {
     ratingEntity.rating = rating.rating;
 
     await this.ratingRepository.update({ ratingId: id }, ratingEntity);
+
+    const egEvent = EventGridBuilder.build(EventType.RatingUpdated, 'rating', {
+      ...ratingEntity,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
   }
 
   @Post()
@@ -194,6 +213,16 @@ export class RatingController {
       user: userEntity,
     };
 
-    await this.ratingRepository.save(ratingEntityPersist);
+    const ratingPersisted = await this.ratingRepository.save(
+      ratingEntityPersist,
+    );
+
+    const egEvent = EventGridBuilder.build(EventType.RatingCreated, 'rating', {
+      ...ratingPersisted,
+    });
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
   }
 }

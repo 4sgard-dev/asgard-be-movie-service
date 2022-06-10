@@ -21,6 +21,8 @@ import { CreateSuggestion } from '../dto/CreateSuggestion';
 import { User } from '../../entities/User';
 import { CreateVote } from '../dto/CreateVote';
 import { Vote } from '../../entities/Vote';
+import { DaprService } from '../../service/dapr/dapr.service';
+import { EventGridBuilder, EventType } from '../../utils/event.utils';
 
 @Controller('suggestions')
 export class SuggestionController {
@@ -35,6 +37,7 @@ export class SuggestionController {
     private voteRepository: Repository<Vote>,
     private movieService: MovieService,
     private tmdbService: TmdbService,
+    private daprService: DaprService,
   ) {}
 
   @Get()
@@ -134,11 +137,28 @@ export class SuggestionController {
 
     await this.suggestionRepository.save(movieEntityPersist);
 
+    const egEvent = EventGridBuilder.build(
+      EventType.SuggestionCreated,
+      'suggestion',
+      {
+        discordId: userEntity.discordId,
+        name: imdbMovie.title,
+        imdbId: suggestion.imdbId,
+      },
+    );
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
+
     return;
   }
 
   @Delete(':id')
-  async deleteSuggestion(@Param('id') imdbId: string) {
+  async deleteSuggestion(
+    @Param('id') imdbId: string,
+    @Headers('discord-id') discordId: string,
+  ) {
     const suggestion = await this.suggestionRepository.findOne({
       where: { imdbId },
     });
@@ -148,6 +168,20 @@ export class SuggestionController {
     }
 
     await this.suggestionRepository.delete({ imdbId });
+
+    const egEvent = EventGridBuilder.build(
+      EventType.SuggestionDeleted,
+      'suggestion',
+      {
+        discordId,
+        name: suggestion.name,
+        imdbId: suggestion.imdbId,
+      },
+    );
+
+    this.daprService.client.binding
+      .send('asgard-eg', 'create', [egEvent])
+      .then();
 
     return suggestion;
   }
