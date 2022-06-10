@@ -17,11 +17,11 @@ export class EventGridBuilder {
 export enum EventType {
   MovieCreated = '4sgard.Movie.MovieCreated',
   MovieDeleted = '4sgard.Movie.MovieDeleted',
-  EventCreated = '4sgard.Event.EventCreated',
-  EventDeleted = '4sgard.Event.EventDeleted',
-  RatingCreated = '4sgard.Rating.RatingCreated',
-  RatingDeleted = '4sgard.Rating.RatingDeleted',
-  RatingUpdated = '4sgard.Rating.RatingUpdated',
+  EventCreated = '4sgard.Movie.EventCreated',
+  EventDeleted = '4sgard.Movie.EventDeleted',
+  RatingCreated = '4sgard.Movie.RatingCreated',
+  RatingDeleted = '4sgard.Movie.RatingDeleted',
+  RatingUpdated = '4sgard.Movie.RatingUpdated',
   SuggestionCreated = '4sgard.Movie.SuggestionCreated',
   SuggestionDeleted = '4sgard.Movie.SuggestionDeleted',
 }
