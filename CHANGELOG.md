@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.0...v1.0.1) (2022-08-07)
+
+
+### Bug Fixes
+
+* get version in deploy workflow ([667951d](https://github.com/4sgard-dev/asgard-be-movie-service/commit/667951d9836f7c80d4867d581e3df08b0f99e72d))
+
 ## 1.0.0 (2022-08-07)
 
 
