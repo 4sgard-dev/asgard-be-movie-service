@@ -16,6 +16,7 @@ services:
       DB_DATABASE: postgres
       TMDB_API_TOKEN: a
       TMDB_URL: http://mockoon:4000
+      DAPR_PORT: 4000
   db:
     image: postgres:14.1-alpine
     restart: always
