@@ -1,6 +1,6 @@
 {
   "uuid": "611466af-087b-41dd-a0e1-92fc4dd336c7",
-  "lastMigration": 19,
+  "lastMigration": 22,
   "name": "Mock",
   "endpointPrefix": "",
   "latency": 0,
@@ -25,12 +25,12 @@
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "7fda57e6-8d6a-4aa2-a70f-ccd013c86b28",
@@ -50,12 +50,12 @@
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "bab948ad-dc6a-45b4-b511-755588ba3bfb",
@@ -75,12 +75,12 @@
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
-          "fallbackTo404": false
+          "fallbackTo404": false,
+          "default": true
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     }
   ],
   "proxyMode": false,
