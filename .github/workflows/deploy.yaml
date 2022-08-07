@@ -7,7 +7,7 @@ name: Create and publish a Docker image
 
 on:
   push:
-    branches: ['main']
+    tags: ['v*']
 
 env:
   REGISTRY: ghcr.io
@@ -38,12 +38,18 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Get tag
+        id: get-tag
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          echo "VERSION=${VERSION:1}" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ github.event.repository.name }}:latest,${{ github.event.repository.name }}:${{ env.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
   deploy:
     name: Deploy to Production
