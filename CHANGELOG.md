@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.1...v1.0.2) (2022-08-07)
+
+
+### Bug Fixes
+
+* update docker image tags to reference ghcr ([0250c04](https://github.com/4sgard-dev/asgard-be-movie-service/commit/0250c04491949703cd8f0cf4dd9163003cf2d036))
+
 ## [1.0.1](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.0...v1.0.1) (2022-08-07)
 
 
