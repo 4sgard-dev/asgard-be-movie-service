@@ -40,6 +40,14 @@ jobs:
         with:
           time: '5s'
       - uses: matt-ball/newman-action@master
+        id: postman-test
         with:
           collection: ./db/postman/4sgard portal.postman_collection.json
           environment: ./db/postman/DEV.postman_environment.json
+        continue-on-error: true
+      - name: Check on failures
+        if: steps.postman-test.outcome != 'success'
+        run: |
+          cd db/
+          docker-compose logs
+          exit 1
