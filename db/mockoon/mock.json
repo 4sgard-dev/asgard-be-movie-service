@@ -81,6 +81,31 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "73717301-85a9-4648-a5d3-c78574fb2729",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "v1.0/bindings/asgard-eg",
+      "responses": [
+        {
+          "uuid": "de615758-069f-406e-93fa-f659ed832a94",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "proxyMode": false,
