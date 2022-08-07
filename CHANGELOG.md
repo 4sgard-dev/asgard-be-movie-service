@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.3](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.2...v1.0.3) (2022-08-07)
+
+
+### Bug Fixes
+
+* bump @nestjs/platform-express from 8.4.4 to 8.4.7 ([f5bcdff](https://github.com/4sgard-dev/asgard-be-movie-service/commit/f5bcdff66e912ff86713c43a7ff25932d5292ba1))
+* bump dapr-client from 2.2.1 to 2.3.1 ([dc17063](https://github.com/4sgard-dev/asgard-be-movie-service/commit/dc17063f9c2bb2a465ccc1b9c3eb89afd0604db5))
+* bump eslint-plugin-prettier from 4.0.0 to 4.2.1 ([ba0293c](https://github.com/4sgard-dev/asgard-be-movie-service/commit/ba0293cff0cccfee3ef804b4155e65ceb41bbf8d))
+* bump nestjs to 9 ([12e235c](https://github.com/4sgard-dev/asgard-be-movie-service/commit/12e235c0cb30c3c5af4da808bce28fefad1c40f3))
+* bump supertest from 6.2.2 to 6.2.4 ([6d2bbf9](https://github.com/4sgard-dev/asgard-be-movie-service/commit/6d2bbf93066e486f8ef39791e4a6fa7a29be2c73))
+* bump typeorm from 0.3.6 to 0.3.7 ([dafcb6d](https://github.com/4sgard-dev/asgard-be-movie-service/commit/dafcb6daa4afacbc1a88dff7fd85c9f96a283a2f))
+* bump typescript from 4.6.4 to 4.7.4 ([12d1a34](https://github.com/4sgard-dev/asgard-be-movie-service/commit/12d1a340ee643aeb9eaaf6ea5bb2a4854273e63b))
+
 ## [1.0.2](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.1...v1.0.2) (2022-08-07)
 
 
