@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.4](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.3...v1.0.4) (2022-08-13)
+
+
+### Bug Fixes
+
+* bump @nestjs/common from 9.0.8 to 9.0.9 ([c60ec3f](https://github.com/4sgard-dev/asgard-be-movie-service/commit/c60ec3f4c81c8c410b374980132f92c9ea0cf2c7))
+* bump @nestjs/platform-express from 9.0.8 to 9.0.9 ([2331f4b](https://github.com/4sgard-dev/asgard-be-movie-service/commit/2331f4bb1fe0aec5e5f45bbe2af8675281f5934d))
+* bump @nestjs/terminus from 9.1.0 to 9.1.1 ([124cfcb](https://github.com/4sgard-dev/asgard-be-movie-service/commit/124cfcb68a916660ecaf46a0e1d78e014aae78fe))
+* bump @nestjs/testing from 9.0.8 to 9.0.9 ([e888df3](https://github.com/4sgard-dev/asgard-be-movie-service/commit/e888df3ffb6151d3ddc32a7fa9a719ff94a1df30))
+* bump @nestjs/typeorm from 9.0.0 to 9.0.1 ([60dbed5](https://github.com/4sgard-dev/asgard-be-movie-service/commit/60dbed5568aec8275cdfe165e671d1d66741aa5c))
+* bump @typescript-eslint/eslint-plugin from 5.32.0 to 5.33.0 ([880b53d](https://github.com/4sgard-dev/asgard-be-movie-service/commit/880b53d5a571670c59ae65b8d88aa1905d40a84a))
+* bump @typescript-eslint/parser from 5.32.0 to 5.33.0 ([d941504](https://github.com/4sgard-dev/asgard-be-movie-service/commit/d9415041df6935de582ae91f5bbefc654c3ee84a))
+
 ## [1.0.3](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.2...v1.0.3) (2022-08-07)
 
 
