@@ -76,6 +76,7 @@ export class SuggestionController {
       //   'votes.suggestion_id = s.suggestion_id',
       // )
       // .leftJoinAndSelect('votes.user', 'vu', 'vu.user_id = votes.user_id')
+      .orderBy('s_interested', 'DESC', 'NULLS LAST')
       .getRawAndEntities();
 
     for (let i = 0; i < entities.length; i++) {
