@@ -248,4 +248,41 @@ export class SuggestionController {
       await this.voteRepository.save(voteEntityPersist);
     }
   }
+
+  @Delete(':id/votes')
+  async deleteVote(
+    @Param('id', ParseIntPipe) suggestionId: number,
+    @Headers('discord-id') discordId: string,
+  ) {
+    const suggestion = await this.suggestionRepository.findOne({
+      where: { suggestionId: suggestionId },
+    });
+
+    if (!suggestion) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    const userEntity: User = await this.userRepository.findOne({
+      where: {
+        discordId: Equal(discordId),
+      },
+    });
+
+    if (!userEntity) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    const voteEntity = await this.voteRepository.findOne({
+      where: {
+        suggestion: Equal(suggestion),
+        user: Equal(userEntity),
+      },
+    });
+
+    if (!voteEntity) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    await this.voteRepository.delete({ voteId: voteEntity.voteId });
+  }
 }
