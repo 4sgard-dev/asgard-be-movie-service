@@ -234,8 +234,12 @@ export class SuggestionController {
 
     const voteEntity = await this.voteRepository.findOne({
       where: {
-        suggestion: Equal(suggestion),
-        user: Equal(userEntity),
+        suggestion: {
+          suggestionId: Equal(suggestionId),
+        },
+        user: {
+          discordId: Equal(discordId),
+        },
       },
     });
 
