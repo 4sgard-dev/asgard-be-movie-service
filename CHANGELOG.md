@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.5...v1.0.6) (2022-09-11)
+
+
+### Bug Fixes
+
+* disable temporarily vote users ([64b5a53](https://github.com/4sgard-dev/asgard-be-movie-service/commit/64b5a531ce59961e3fbea69314af60494e9f1a7d))
+
 ## [1.0.5](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.4...v1.0.5) (2022-09-11)
 
 
