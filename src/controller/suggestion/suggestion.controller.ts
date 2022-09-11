@@ -70,12 +70,12 @@ export class SuggestionController {
         'not_interested',
         'not_interested.suggestion_id = s.suggestion_id',
       )
-      .leftJoinAndSelect(
-        's.votes',
-        'votes',
-        'votes.suggestion_id = s.suggestion_id',
-      )
-      .leftJoinAndSelect('votes.user', 'vu', 'vu.user_id = votes.user_id')
+      // .leftJoinAndSelect(
+      //   's.votes',
+      //   'votes',
+      //   'votes.suggestion_id = s.suggestion_id',
+      // )
+      // .leftJoinAndSelect('votes.user', 'vu', 'vu.user_id = votes.user_id')
       .getRawAndEntities();
 
     for (let i = 0; i < entities.length; i++) {
