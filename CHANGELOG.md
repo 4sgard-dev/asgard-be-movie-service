@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.6...v1.0.7) (2022-09-11)
+
+
+### Bug Fixes
+
+* add order to suggestions ([e5208e3](https://github.com/4sgard-dev/asgard-be-movie-service/commit/e5208e3a329bac3b4880c6ab62c8b04079d0bca1))
+
 ## [1.0.6](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.5...v1.0.6) (2022-09-11)
 
 
