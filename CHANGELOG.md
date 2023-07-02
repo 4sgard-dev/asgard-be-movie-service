@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.7...v1.1.0) (2023-07-02)
+
+
+### Features
+
+* add option to comment movie rating ([75207f5](https://github.com/4sgard-dev/asgard-be-movie-service/commit/75207f58cfc52d30814e9868a0d277cf5dadef15))
+
+
+### Bug Fixes
+
+* bump class-validator from 0.13.2 to 0.14.0 ([459a3ef](https://github.com/4sgard-dev/asgard-be-movie-service/commit/459a3ef3ccda33cb21152bb80dc164d5109dd727))
+* bump eslint from 8.21.0 to 8.42.0 ([bd23756](https://github.com/4sgard-dev/asgard-be-movie-service/commit/bd237564e9fd68be69ad56e29a3d3968613c635a))
+* bump xml2js and typeorm ([1cf83b2](https://github.com/4sgard-dev/asgard-be-movie-service/commit/1cf83b2830975cc54cb4f148254411e2264e4825))
+
 ## [1.0.7](https://github.com/4sgard-dev/asgard-be-movie-service/compare/v1.0.6...v1.0.7) (2022-09-11)
 
 
