@@ -143,6 +143,10 @@ export class RatingController {
 
     ratingEntity.rating = rating.rating;
 
+    if (rating.comment) {
+      ratingEntity.comment = rating.comment;
+    }
+
     await this.ratingRepository.update({ ratingId: id }, ratingEntity);
 
     const egEvent = EventGridBuilder.build(EventType.RatingUpdated, 'rating', {
@@ -211,6 +215,7 @@ export class RatingController {
       rating: rating.rating,
       movieId,
       user: userEntity,
+      ...((rating.comment && { comment: rating.comment }) || {}),
     };
 
     const ratingPersisted = await this.ratingRepository.save(

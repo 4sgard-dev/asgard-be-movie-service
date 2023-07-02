@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, ValidateIf } from 'class-validator';
+import {IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf} from 'class-validator';
 
 export class CreateRating {
   @IsNotEmpty()
@@ -14,4 +14,8 @@ export class CreateRating {
   @IsNotEmpty()
   @IsString()
   imdbId: string;
+
+  @IsOptional()
+  @IsString()
+  comment: string;
 }
