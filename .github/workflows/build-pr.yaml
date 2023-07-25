@@ -31,7 +31,7 @@ jobs:
       - name: Run application and DB
         run: docker-compose -f ./db/docker-compose.yaml up -d
       - name: Postgres Backup Restore
-        uses: tj-actions/pg-restore@v4.5
+        uses: tj-actions/pg-restore@v4.10
         with:
           database_url: "postgres://postgres:postgres@localhost:5432/postgres"
           backup_file: "./db/asgard.dump"
